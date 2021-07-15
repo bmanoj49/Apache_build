@@ -1,0 +1,12 @@
+#!/bin/bash
+
+for f in "$@"
+do
+if [ ! -f "$f" ];then
+echo "File doesn't exist"
+continue
+fi 
+echo "converting $f."
+newfile=$(expand -t 5 "$f");
+echo "$newfile" > "$f";
+done

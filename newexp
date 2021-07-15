@@ -1,0 +1,11 @@
+i=1
+echo $i
+while (( $i <= 10))
+do
+((++i))
+if (( $i == 5 ))
+then
+continue
+fi
+echo $i
+done

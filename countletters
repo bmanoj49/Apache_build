@@ -1,0 +1,10 @@
+if [ -z "$1" ];then
+echo "usage: $0 filename"
+exit 1
+fi
+
+filename=$1
+while read -n 1 c
+do 
+echo "$c"
+done < "$filename" | grep '[[:alpha:]]' | sort | uniq -c | sort -nr

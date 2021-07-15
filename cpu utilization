@@ -1,0 +1,22 @@
+#!/bin/bash
+PATHS="/"
+HOSTNAME=$(hostname)
+CRITICAL=98
+WARNING=90
+CRITICALmail="bsvrjss@gmail.com"
+MailVar="bmanoj49@gmail.com"
+mkdir -p /var/log/cpuutilist
+LOGFILE=/var/log/cpuutilist/cpusage-`date +%h%d%y`.log
+
+touch $LOGFILE
+
+for path in $PATHS
+do
+CPULOAD=`top -b -n 2 -d1 | grep "Cpu(s)" | tail -n1 | awk '{print $2}' | awk -F. '{print $1}'
+if [ -n $WARNING -a -n $CRITICAL ];then
+if [ "$CPULOAD" -ge "$WARNING" -a "$CPULOAD" -lt "$CRITICAL"];then
+echo " `date +%F %H: %M: %S` WARNING -$CPULOAD on $HOSTNAME " >> $LOGFILE
+echo "warning cpuload $CPULOAD host is $HOSTNAME" | mail -s "CPULOAD is warning" $MailVar
+exit 1
+elif [ "$CPULOAD" -ge "$CRITICAL"];then
+

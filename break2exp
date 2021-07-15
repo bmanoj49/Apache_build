@@ -1,0 +1,11 @@
+for i in `seq 1 10`
+do
+for j in `seq 1 10`
+do
+if (($j==2));then
+break 2
+fi
+echo "value of j is $j"
+done
+echo "value of i is $i"
+done
